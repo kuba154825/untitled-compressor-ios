@@ -1,0 +1,44 @@
+name: Build unsigned iPhone IPA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: unsigned-iphone-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify project structure
+        run: python3 tools/verify_project.py
+      - name: Build and package physical iPhone app
+        run: bash tools/build-unsigned-ios.sh
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: Untitled-Compressor-unsigned-IPA
+          path: |
+            build/ipa/Untitled-Compressor-unsigned.ipa
+            build/ipa/SHA256SUMS.txt
+            build/ipa/BUILD-INFO.json
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
+      - name: Upload build diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: iphone-build-diagnostics
+          path: build/device-build.log
+          if-no-files-found: ignore
+          retention-days: 3

@@ -1,0 +1,14 @@
+{
+  "swiftSyntaxParsed": true,
+  "openStepProjectParsed": true,
+  "plistAndSchemeParsed": true,
+  "projectSourceFiles": 10,
+  "frameworkArchiveHashesVerified": 8,
+  "iosDeviceAndSimulatorSlicesVerified": true,
+  "videoToolboxEncoderPresent": true,
+  "nativeHeaderMethodNamesChecked": true,
+  "xcodeBuildRun": false,
+  "iosSimulatorRun": false,
+  "physicalDeviceRun": false,
+  "limitations": "Syntax/structural checks on Windows only; compile and execute included tests in Xcode on the Mac."
+}
