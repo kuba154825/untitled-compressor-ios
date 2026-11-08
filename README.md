@@ -1,6 +1,21 @@
 # Untitled Compressor for iOS
 
-Native SwiftUI source for iPhone and iPad, iOS 17 or newer. Open **UntitledCompressor.xcodeproj** on a Mac with Xcode 16 or newer. No Node.js, Electron, Flutter, CocoaPods or Homebrew is needed.
+Native SwiftUI source for iPhone and iPad, iOS 17 or newer. No Node.js, Electron, Flutter, CocoaPods or Homebrew is needed.
+
+## Build from Windows without a Mac
+
+See **WINDOWS-BUILD.md**. The manual GitHub Actions workflow builds an unsigned
+physical-iPhone IPA using a standard macOS runner. The first Release build
+succeeded with Xcode 16.4 on November 8, 2026:
+https://github.com/kuba154825/untitled-compressor-ios/actions/runs/42525718155
+
+Download the IPA artifact, then sign and install it using Sideloadly on Windows
+with your own Apple account. The free signing route needs refreshing every
+seven days. The source repository is public with the owner's approval so its
+standard macOS Actions runner can be used for free.
+
+The IPA has been compiled and its packaging checked, but has not been run on
+an iPhone or in the simulator. Test actual compression on your device.
 
 ## On your friend's Mac
 
@@ -49,13 +64,17 @@ Output is MP4 H.264 8-bit 4:2:0 + AAC. Only the first ordinary video and first a
 
 The `min` package avoids bundling the GPL x264 codec used by the Windows build. The third-party libraries still have their own licenses; copies and provenance are in `ThirdPartyNotices`. Review those obligations before public distribution. Do not replace the package with a GPL variant without reviewing that change.
 
-Swift and Objective-C application code compile to native machine code in an Xcode archive; there is no readable app JavaScript, JS obfuscator or V8 bytecode. Release settings enable optimization and stripping. This is not a claim that native binaries cannot be reverse engineered. Keep this entire source handoff private if editable application source is private; distribute only the signed app through your intended Apple distribution route. Do not publish dSYM/debug artifacts with the app.
+Swift and Objective-C application code compile to native machine code; there is no app JavaScript, JS obfuscator or V8 bytecode. Release settings enable optimization and stripping. Native binaries can still be reverse engineered. This source is now public with the owner's approval; the downloadable IPA artifact does not include dSYM/debug artifacts.
 
 ## Verification status
 
-Prepared on Windows: Swift syntax parsing, Xcode project structure/reference checks, Info/Privacy plist parsing, pinned dependency archive hashes, supported platform slices, native header API names, and presence of the VideoToolbox encoder were checked. No Xcode/iOS SDK or Apple device was available here, so **the app has not been compiled, signed or run on iOS**.
+The physical-device Release app was successfully compiled with Xcode 16.4 on
+GitHub's macOS runner on November 8, 2026. The build checked the project
+structure, arm64 architecture, embedded dynamic framework dependencies, and
+IPA ZIP integrity. The downloaded artifact's SHA-256 was checked locally.
+The app remains unsigned and has not been run on an iPhone or simulator.
 
-The included tests are for the Mac handoff and must actually pass there:
+The included runtime tests have not been run in this build:
 
 - `CompressionTests`: target arithmetic, video/audio budget priority, silent input, invalid values and container detection.
 - `MediaSmokeTests`: generate real test videos; compress percentage and target-MB outputs; verify size, duration, audio and full decoding; verify silent output and cancellation before launch.

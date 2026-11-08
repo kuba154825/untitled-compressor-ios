@@ -7,8 +7,18 @@
   "iosDeviceAndSimulatorSlicesVerified": true,
   "videoToolboxEncoderPresent": true,
   "nativeHeaderMethodNamesChecked": true,
-  "xcodeBuildRun": false,
+  "xcodeBuildRun": true,
+  "xcodeVersion": "16.4 (16F6)",
+  "configuration": "Release",
+  "platform": "iPhoneOS",
+  "architecture": "arm64",
+  "buildRun": "https://github.com/kuba154825/untitled-compressor-ios/actions/runs/42525718155",
+  "buildCommit": "d7eec1b6c92b98fca4cbadeffe80dd3efa893e76",
+  "embeddedFrameworksVerified": true,
+  "ipaIntegrityVerified": true,
+  "ipaSHA256": "0e37a1771eef76d854d42b8d0b4b4e001e0f382c4618ed9b84d17afd58074847",
+  "signedForInstallation": false,
   "iosSimulatorRun": false,
   "physicalDeviceRun": false,
-  "limitations": "Syntax/structural checks on Windows only; compile and execute included tests in Xcode on the Mac."
+  "limitations": "Successful device Release compilation and IPA checks. Runtime tests and physical-device testing have not been performed. Sign with Sideloadly before installation."
 }
